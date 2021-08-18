@@ -59,27 +59,32 @@ public class WebsocketServer {
             this.session = session;
             socketMap.put(sysUser.getId(), this);
             sendMessage(session, "连接成功");
+            System.out.println(socketMap);
         }
 
     }
 
     @OnClose
     public void onClose(@PathParam("token") String token) {
-        socketMap.remove(this);
+        socketMap.remove(this.id);
         log.info("用户" + token + "下线");
+        System.out.println(socketMap);
     }
 
     @OnMessage
     public void onMessage(Session session, @PathParam("token") String token, @PathParam("to") String to, String message) {
-        Session toSession = socketMap.get(to).session;
+        WebsocketServer websocketServer = socketMap.get(to);
         //保存消息
         //************
         //如果不在线则不发送，直接结束
-        if (toSession == null) {
-            return;
+        if (websocketServer == null) {
+            sendMessage(session, "对方不在线，存储到历史消息中");
+        } else {
+            System.out.println("服务端收到来自客户端的消息：" + message + "=====>需要转发给用户" + websocketServer.getId());
+            sendMessage(websocketServer.getSession(), message);
+            sendMessage(session, "发送成功");
         }
-        sendMessage(toSession, message);
-        System.out.println("服务端收到来自客户端的消息：" + message + "需要转发给用户" + socketMap.get(to).id);
+
     }
 
     public void sendMessage(Session session, String message) {
