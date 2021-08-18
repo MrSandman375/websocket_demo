@@ -59,7 +59,7 @@ public class WebsocketServer {
     @OnClose
     public void onClose() {
         socketMap.remove(this.id);
-        log.info("用户" + sysUserHolder.getUser().getUsername() + "下线");
+        System.out.println(socketMap);
     }
 
     /**
