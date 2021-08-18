@@ -13,14 +13,9 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class AsyncSaveMessage {
 
-    @Async
-    public void saveMessage(String message) {
-        try {
-            Thread.sleep(6 * 1000);
-            log.info("消息为：{}", message);
-        } catch (InterruptedException e) {
-            log.info("error：{}", e.getMessage());
-        }
+    @Async(value = "asyncSaveMessage")
+    public void saveMessage(String from,String to,String message) {
+        log.info("保存从" + from + "发给" + to + "的消息：" + message);
     }
 
 }
