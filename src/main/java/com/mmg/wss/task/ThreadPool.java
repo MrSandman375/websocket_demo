@@ -13,7 +13,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 @Configuration
 public class ThreadPool {
 
-    @Bean("asyncSaveMessage")
+    @Bean("asyncTaskExecutor")
     public AsyncTaskExecutor asyncTaskExecutor(){
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         taskExecutor.setCorePoolSize(5);
