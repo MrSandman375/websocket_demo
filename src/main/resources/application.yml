@@ -1,3 +1,10 @@
+server:
+  port: 8443
+  ssl:
+    key-alias: tomcat
+    key-store: classpath:keystore.jks
+    key-password: 123456
+    key-store-password: 123456
 spring:
   redis:
     host: localhost
@@ -10,4 +17,3 @@ spring:
         min-idle: 0
         max-wait: -1ms
         max-idle: 8
-
