@@ -1,2 +1,2 @@
 # websocket_demo
-websocket实现聊天的demo
+websocket实现聊天的demo,并实现基于token鉴权
